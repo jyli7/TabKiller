@@ -1,0 +1,14 @@
+{
+	"name": "TabSniper",
+	"version": "0.1",
+	"description": "Let's you selectively kill ('snipe') groups of tabs (by title or by position in the window).",
+	"browser_action": {
+		"default_icon": "crosshairs.png",
+		"default_title": "TabSniper",
+		"popup": "popup.html"
+	},
+	"background_page": "background.html",
+	"permissions": [
+		"tabs"
+	]
+}

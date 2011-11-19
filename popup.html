@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<script>
+		
+		function c4() {
+			//grab and store the user input
+			var input_title = document.main_form.title_field.value;
+			
+			//iterate through tabs and kill the tabs whose titles match the user's input
+			chrome.tabs.getAllInWindow(null, function(tabs){
+				for(i in tabs) {
+					var title = tabs[i].title;
+					// var title_match = title.match(input_title);
+					if(title.match(new RegExp(input_title, "i")) !== null) {
+						chrome.tabs.remove(tabs[i].id);
+					}			
+				}
+			});
+		}
+		</script>
+	</head>
+	<body>
+		
+		<form name="main_form" class="main_form" action="#" onsubmit="c4()">
+			<div class="first_row">
+				C4: <input class="input_first_row" type="text" name="title_field">
+			</div>
+			<input type="submit" id="submit_button">
+		</form>
+	</body>
