@@ -4,7 +4,12 @@
 		
 		function c4() {
 			//grab and store the user input
-			var input_title = document.main_form.title_field.value;
+			var input_title;
+			if (document.main_form.cfour.value != "") {
+				input_title = document.main_form.cfour.value;
+
+			// var input_title = document.getElementById("c4").value;
+			// alert(input_title)
 			
 			//iterate through tabs and kill the tabs whose titles match the user's input
 			chrome.tabs.getAllInWindow(null, function(tabs){
@@ -16,14 +21,36 @@
 					}			
 				}
 			});
+			}
+			
+			if (document.main_form.sniper.value != "") {
+				input_title = document.main_form.sniper.value;
+
+			// var input_title = document.getElementById("c4").value;
+			// alert(input_title)
+			
+			//iterate through tabs and kill the tabs whose titles match the user's input
+			chrome.tabs.getAllInWindow(null, function(tabs){
+				for(i in tabs) {
+					var title = tabs[i].title;
+					// var title_match = title.match(input_title);
+					if(title == input_title) {
+						chrome.tabs.remove(tabs[i].id);
+					}			
+				}
+			});
+			}
+			
 		}
 		</script>
 	</head>
 	<body>
-		
 		<form name="main_form" class="main_form" action="#" onsubmit="c4()">
 			<div class="first_row">
-				C4: <input class="input_first_row" type="text" name="title_field">
+				C4: <input class="input_first_row" type="text" name="cfour">
+			</div>
+			<div class="first_row">
+				Sniper: <input class="input_first_row" type="text" name="sniper">
 			</div>
 			<input type="submit" id="submit_button">
 		</form>
