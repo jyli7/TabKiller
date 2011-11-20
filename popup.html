@@ -2,52 +2,82 @@
 	<head>
 		<script>
 		
-		function c4() {
+		function kill() {
 			//grab and store the user input
 			var input_title;
-			if (document.main_form.cfour.value != "") {
+			
+			//FOR C4
+			if (document.main_form.cfour.value !== "") {
 				input_title = document.main_form.cfour.value;
-
-			// var input_title = document.getElementById("c4").value;
-			// alert(input_title)
 			
-			//iterate through tabs and kill the tabs whose titles match the user's input
-			chrome.tabs.getAllInWindow(null, function(tabs){
-				for(i in tabs) {
-					var title = tabs[i].title;
-					// var title_match = title.match(input_title);
-					if(title.match(new RegExp(input_title, "i")) !== null) {
-						chrome.tabs.remove(tabs[i].id);
-					}			
-				}
-			});
+				//iterate through tabs and kill the tabs whose titles match the user's input
+				chrome.tabs.getAllInWindow(null, function(tabs){
+					for(i in tabs) {
+						var title = tabs[i].title;
+						// var title_match = title.match(input_title);
+						if(title.match(new RegExp(input_title, "i")) !== null) {
+							chrome.tabs.remove(tabs[i].id);
+						}			
+					}
+				});
 			}
 			
-			if (document.main_form.sniper.value != "") {
+			// FOR BUNKER
+			if (document.main_form.bunker.value !== "") {
+				input_title = document.main_form.bunker.value;
+				//get current tab
+				
+				//iterate through tabs and kill the tabs whose titles match the user's input
+				chrome.tabs.getAllInWindow(null, function(tabs){
+					//if we get this 'c;' as input, kill all but current
+					
+					if (input_title === "c;"){
+						chrome.tabs.getSelected(null, function(tab){
+							for(i in tabs) {
+								//remove all but the current tab
+								if(tabs[i].id !== tab.id)
+									chrome.tabs.remove(tabs[i].id);
+								}
+							});
+						}
+					else {
+						for(i in tabs) {
+							var title = tabs[i].title;
+							// var title_match = title.match(input_title);
+							if(title.match(new RegExp(input_title, "i")) === null) {
+								alert("hello!");
+								chrome.tabs.remove(tabs[i].id);
+							}
+						}
+					}
+				});
+			}
+
+			//FOR SNIPER						
+			if (document.main_form.sniper.value !== "") {
 				input_title = document.main_form.sniper.value;
-
-			// var input_title = document.getElementById("c4").value;
-			// alert(input_title)
 			
-			//iterate through tabs and kill the tabs whose titles match the user's input
-			chrome.tabs.getAllInWindow(null, function(tabs){
-				for(i in tabs) {
-					var title = tabs[i].title;
-					// var title_match = title.match(input_title);
-					if(title == input_title) {
-						chrome.tabs.remove(tabs[i].id);
-					}			
-				}
-			});
-			}
-			
+				//iterate through tabs and kill the tabs whose titles match the user's input
+				chrome.tabs.getAllInWindow(null, function(tabs){
+					for(i in tabs) {
+						var title = tabs[i].title;
+						// var title_match = title.match(input_title);
+						if(title === input_title) {
+							chrome.tabs.remove(tabs[i].id);
+						}			
+					}
+				});
+			}			
 		}
 		</script>
 	</head>
 	<body>
-		<form name="main_form" class="main_form" action="#" onsubmit="c4()">
+		<form name="main_form" class="main_form" action="#" onsubmit="kill()">
 			<div class="first_row">
 				C4: <input class="input_first_row" type="text" name="cfour">
+			</div>
+			<div class="first_row">
+				Bunker: <input class="input_first_row" type="text" name="bunker">
 			</div>
 			<div class="first_row">
 				Sniper: <input class="input_first_row" type="text" name="sniper">
