@@ -25,7 +25,10 @@
 			// FOR BUNKER
 			if (document.main_form.bunker.value !== "") {
 				input_title = document.main_form.bunker.value;
-				//get current tab
+				//if the input is anything but "c;"
+				if(input_title !== "c;"){
+					var inputs = input_title.split(', ');
+				}
 				
 				//iterate through tabs and kill the tabs whose titles match the user's input
 				chrome.tabs.getAllInWindow(null, function(tabs){
@@ -41,13 +44,21 @@
 							});
 						}
 					else {
+						var safe;
+						//cycle through the tabs
 						for(i in tabs) {
 							var title = tabs[i].title;
-							// var title_match = title.match(input_title);
-							if(title.match(new RegExp(input_title, "i")) === null) {
-								alert("hello!");
-								chrome.tabs.remove(tabs[i].id);
+							//each tab is by default NOT safe
+							safe = false;
+							//cycle through the inputs, and if any of the inputs matches, protect the tab!
+							for(j in inputs) {
+								if(title.match(new RegExp(inputs[j], "i")) !== null){
+									safe = true;
+									break
+								}
 							}
+							if(safe === false)
+								chrome.tabs.remove(tabs[i].id);	
 						}
 					}
 				});
