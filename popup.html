@@ -1,86 +1,7 @@
 <html>
 	<head>
-		<script>
+		<script type="text/javascript" src="tab_sniper.js"></script>
 		
-		function kill() {
-			//grab and store the user input
-			var input_title;
-			
-			//FOR C4
-			if (document.main_form.cfour.value !== "") {
-				input_title = document.main_form.cfour.value;
-			
-				//iterate through tabs and kill the tabs whose titles match the user's input
-				chrome.tabs.getAllInWindow(null, function(tabs){
-					for(i in tabs) {
-						var title = tabs[i].title;
-						// var title_match = title.match(input_title);
-						if(title.match(new RegExp(input_title, "i")) !== null) {
-							chrome.tabs.remove(tabs[i].id);
-						}			
-					}
-				});
-			}
-			
-			// FOR BUNKER
-			if (document.main_form.bunker.value !== "") {
-				input_title = document.main_form.bunker.value;
-				//if the input is anything but "c;"
-				if(input_title !== "c;"){
-					var inputs = input_title.split(', ');
-				}
-				
-				//iterate through tabs and kill the tabs whose titles match the user's input
-				chrome.tabs.getAllInWindow(null, function(tabs){
-					//if we get this 'c;' as input, kill all but current
-					
-					if (input_title === "c;"){
-						chrome.tabs.getSelected(null, function(tab){
-							for(i in tabs) {
-								//remove all but the current tab
-								if(tabs[i].id !== tab.id)
-									chrome.tabs.remove(tabs[i].id);
-								}
-							});
-						}
-					else {
-						var safe;
-						//cycle through the tabs
-						for(i in tabs) {
-							var title = tabs[i].title;
-							//each tab is by default NOT safe
-							safe = false;
-							//cycle through the inputs, and if any of the inputs matches, protect the tab!
-							for(j in inputs) {
-								if(title.match(new RegExp(inputs[j], "i")) !== null){
-									safe = true;
-									break
-								}
-							}
-							if(safe === false)
-								chrome.tabs.remove(tabs[i].id);	
-						}
-					}
-				});
-			}
-
-			//FOR SNIPER						
-			if (document.main_form.sniper.value !== "") {
-				input_title = document.main_form.sniper.value;
-			
-				//iterate through tabs and kill the tabs whose titles match the user's input
-				chrome.tabs.getAllInWindow(null, function(tabs){
-					for(i in tabs) {
-						var title = tabs[i].title;
-						// var title_match = title.match(input_title);
-						if(title === input_title) {
-							chrome.tabs.remove(tabs[i].id);
-						}			
-					}
-				});
-			}			
-		}
-		</script>
 	</head>
 	<body>
 		<form name="main_form" class="main_form" action="#" onsubmit="kill()">
@@ -91,7 +12,7 @@
 				Bunker: <input class="input_first_row" type="text" name="bunker">
 			</div>
 			<div class="first_row">
-				Sniper: <input class="input_first_row" type="text" name="sniper">
+				Cannon: <input class="input_first_row" type="text" name="cannon">
 			</div>
 			<input type="submit" id="submit_button">
 		</form>
