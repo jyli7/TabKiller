@@ -14,12 +14,4 @@
 	"permissions": [
 		"tabs"
 	],
-	"content_scripts" : [
-	{
-		"matches": ["http://*/*", "https://*/*", "ftp://*/*"],
-		"js": ["keyboard_shortcut.js"],
-		"run_at": "document_start",
-      	"all_frames": true		
-	}
-	]
 }
