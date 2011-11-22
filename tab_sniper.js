@@ -1,5 +1,9 @@
-var console = chrome.extension.getBackgroundPage().console;
+//auto-focus on sniper
+$(document).ready(function() {
+	$('#sniper_input').focus();	
+});
 
+var console = chrome.extension.getBackgroundPage().console;
 //FOR SNIPER
 function sniper(input_title) {
 	inputs = input_title.split(', ');
