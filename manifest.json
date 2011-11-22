@@ -1,7 +1,7 @@
 {
 	"name": "TabKiller",
 	"version": "0.1",
-	"description": "Let's you selectively kill groups of tabs (by title or by position in the window).",
+	"description": "Kills tabs discriminately. Sniper kills by partial title match. Bunker protects by partial title match (and kills everything else). Cannon kills tab ranges (e.g. 2-4).",
 	"icons": { "16": "images/icon16.png",
 	           "48": "images/icon48.png",
 	          "128": "images/icon128.png" },

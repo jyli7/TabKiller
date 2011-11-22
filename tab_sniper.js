@@ -1,24 +1,30 @@
-function tab_cycle(for_regex) {
-}
-
 function kill() {
 	//grab and store the user input
 	var input_title;
 	
 	//FOR C4
-	if (document.main_form.cfour.value !== "") {
-		input_title = document.main_form.cfour.value;
+	if (document.main_form.sniper.value !== "") {
+		input_title = document.main_form.sniper.value;
+		inputs = input_title.split(', ');
 		
 		//iterate through tabs and kill the tabs whose titles match any part of user's input
 		chrome.tabs.getAllInWindow(null, function(tabs){
 			for(i in tabs) {
 				var title = tabs[i].title;
-				if(title.match(new RegExp(input_title, "i")) !== null) {
-					chrome.tabs.remove(tabs[i].id);
+				var safe = true;
+				for (j in inputs) {
+					if(title.match(new RegExp(inputs[j], "i")) !== null){
+						safe = false;
+						break
+					}
+				}
+				
+				if(safe === false){
+					chrome.tabs.remove(tabs[i].id);	
 				}			
 			}
 		});
-	}		
+	}	
 	
 	// FOR BUNKER
 	if (document.main_form.bunker.value !== "") {
@@ -27,11 +33,11 @@ function kill() {
 		
 		//iterate through the tabs and kill the tabs whose titles match the user's input
 		chrome.tabs.getAllInWindow(null, function(tabs){
-			//if c; is one of the indexes, cycle through the tabs JUST to protect that tab
 			chrome.tabs.getSelected(null, function(tab){
 				for(i in tabs) {
 					var title = tabs[i].title;
 					var safe = false;
+					//did the user want to save the current tab?
 					var save_current_tab = (inputs.indexOf("c;") !== -1);
 					if ( save_current_tab === true && parseInt(i) === parseInt(tab.index)) {
 						safe = true;
@@ -44,6 +50,7 @@ function kill() {
 							}
 						}	
 					}
+					//if the tab is not safe, kill it
 					if(safe === false){
 						chrome.tabs.remove(tabs[i].id);	
 					}
