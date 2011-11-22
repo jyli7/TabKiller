@@ -1,19 +1,24 @@
 <html>
 	<head>
 		<script type="text/javascript" src="tab_sniper.js"></script>
-		
+		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body>
-		<form name="main_form" class="main_form" action="#" onsubmit="kill()">
-			<div class="first_row">
-				C4: <input class="input_first_row" type="text" name="cfour">
+		<form name="main_form" class="main_form round" action="#" onsubmit="kill()">
+			<div id="choose_weapon">Choose your weapon:</div>
+			<div class="input_container">
+				<div class="input_name">Sniper:</div> 
+				<input class="input_field" type="text" name="cfour">
 			</div>
-			<div class="first_row">
-				Bunker: <input class="input_first_row" type="text" name="bunker">
+			<div class="input_container">
+				<div class="input_name">Bunker:</div> 
+				<input class="input_field" type="text" name="bunker">
 			</div>
-			<div class="first_row">
-				Cannon: <input class="input_first_row" type="text" name="cannon">
+			<div class="input_container">
+				<div class="input_name">Cannon:</div>
+				<input id="last_field" class="input_field" type="text" name="cannon">
 			</div>
 			<input type="submit" id="submit_button">
 		</form>
 	</body>
+</html>

@@ -1,0 +1,60 @@
+body {
+	width:250px;
+	-moz-border-radius:    10px;
+  	-webkit-border-radius: 10px;
+  	border-radius:         10px;
+}
+
+.main_form {
+	margin:0px, -5px, -5px, -5px;
+	padding:5px;
+	background-color:#EFEFEF;
+	font-family:Garamond, Courier, sans-serif;
+	font-size:17px;
+}
+
+#choose_weapon {
+	background-color: #BFBFBF;
+	padding:4px;
+}
+
+.input_container {
+	padding-bottom:5px;
+	margin:4px 5px 4px 0px;
+}
+
+.input_name {
+	padding:4px;
+	margin:0px 0px 3px 0px;
+	display:inline-block;
+	vertical-align:middle;
+}
+
+.input_field {
+	float:right;
+	margin:5px 0px 5px 0px;
+	vertical-align:middle;
+	width:150px;
+}
+
+
+.img_container {
+	display:inline-block;
+	width:50px;
+}
+
+.weapon_img {
+	padding:2px 3px 2px 3px;
+	vertical-align:middle;
+	display:inline-block;
+	margin:0px auto;
+}
+
+.round {
+  -moz-border-radius:    10px;
+  -webkit-border-radius: 10px;
+  border-radius:         10px;
+}
+
+
+

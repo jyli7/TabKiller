@@ -57,13 +57,17 @@ function kill() {
 		input_title = document.main_form.cannon.value;
 		
 		//get the starting number and the ending number
-		var boundaries = input_title.split(', ');
+		var boundaries = input_title.split('-');
 		var start = parseInt(boundaries[0]);
-		var finish = parseInt(boundaries[1]);
+		var end;
+		if(boundaries.length === 1)
+			end = start;
+		else 
+			end = parseInt(boundaries[1]);
 		//iterate through tabs and kill the tabs whose titles match any part of user's input
 		chrome.tabs.getAllInWindow(null, function(tabs){
 			for(i in tabs) {
-				if(i >= start && i <= finish) {
+				if(i >= (start-1) && i <= (end-1)) {
 					chrome.tabs.remove(tabs[i].id);
 				}			
 			}
