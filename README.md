@@ -4,7 +4,7 @@
 
 - - -
 
-[chrome extension page](http://www.google.com)
+[Chrome extension page](https://chrome.google.com/webstore/detail/jjfclhcimohfdhjbcbgjnphiieebicbp?hl=en-US&gl=US)
 
 - - -
 
