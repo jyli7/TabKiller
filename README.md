@@ -26,8 +26,8 @@ If you want to protect multiple tabs, separate your inputs with a comma, e.g. "g
 
 **Cannon**: Range kill.
 The cannon kills a range of tabs. If you enter "1-4," for example, you'll kill the first tab through the fourth tab (inclusive).
+If you want to kill all tabs from a certain number to the end, use "#-end", e.g. "4-end".
+
 *Note*: The first tab is 1, not 0. 
-
-
 
 - - -
