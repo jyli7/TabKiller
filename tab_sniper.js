@@ -56,16 +56,19 @@ function bunker(input_title) {
 function cannon(input_title) {
 	input_title = document.main_form.cannon.value;
 	
-	//get the starting number and the ending number
-	var boundaries = input_title.split('-');
-	var start = parseInt(boundaries[0]);
-	var end;
-	if(boundaries.length === 1)
-		end = start;
-	else 
-		end = parseInt(boundaries[1]);
 	//iterate through tabs and kill the tabs whose titles match any part of user's input
 	chrome.tabs.getAllInWindow(null, function(tabs){
+		//get the starting number and the ending number
+		var boundaries = input_title.split('-');
+		var start = parseInt(boundaries[0]);
+		var end;
+
+		if(boundaries.length === 1)
+			end = start;
+		else if(boundaries[1] === "end")
+			end = tabs.length;
+		else 
+			end = parseInt(boundaries[1]);
 		for(i in tabs) {
 			if(i >= (start-1) && i <= (end-1)) {
 				chrome.tabs.remove(tabs[i].id);
