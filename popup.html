@@ -1,13 +1,13 @@
 <html>
 	<head>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-		<script type="text/javascript" src="tab_sniper.js"></script>
+    <script type="text/javascript" src="tab_sniper.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Jura' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body>
-		<form name="main_form" class="main_form round" action="#" onsubmit="kill()">
-			<div id="choose_weapon">Choose your weapon:</div>
+		<form name="main_form" class="main_form round" action="#" onsubmit="return onSubmitForm();">
+			<div id="choose_weapon" class="miniround">Choose your weapon:</div>
 			<div class="input_container">
 				<div class="input_name">Sniper:</div> 
 				<input class="input_field" type="text" name="sniper" title="e.g. goog" id="sniper_input">
@@ -20,7 +20,10 @@
 				<div class="input_name">Cannon:</div>
 				<input id="last_field" class="input_field" type="text" name="cannon" title="e.g. 1-4">
 			</div>
-			<input type="submit" id="submit_button">
+      <input type="submit" id="submit_button" name ="submit" 
+        onclick="document.pressed=this.value" value="Shoot"/>
+      <input type="submit" id="submit_button" name ="submit" 
+        onclick="document.pressed=this.value" value="Shoot and Reload"/>
 		</form>
 	</body>
 </html>
