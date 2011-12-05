@@ -27,7 +27,7 @@ function sniper(input_title, reload_arg) {
 				chrome.tabs.remove(tabs[i].id);	
 			}
 		}
-  
+ 
     if (reload_arg === 1){
       reload(sniped_tabs);
     }
@@ -36,7 +36,6 @@ function sniper(input_title, reload_arg) {
 	
 // BUNKER FUNCTION
 function bunker(input_title, reload_arg) {
-	input_title = document.main_form.bunker.value;
 	inputs = input_title.split(', ');
 	non_bunker_tabs = [];
 
@@ -67,7 +66,6 @@ function bunker(input_title, reload_arg) {
 	
 //FOR CANNON
 function cannon(input_title, reload_arg) {
-	input_title = document.main_form.cannon.value;
 	cannoned_tabs = [];
 
 	//iterate through tabs and kill the tabs whose titles match any part of user's input
@@ -100,19 +98,20 @@ function shoot(reload_arg) {
 	//grab and store the user input
 	var input_title;
 	var inputs;
-	
+
+
 	//Execute functions
-	if (document.main_form.sniper.value !== "") {
+	if (document.main_form.sniper.value != "") {
 		var user_input = document.main_form.sniper.value;
 		sniper(user_input, reload_arg);
 	}
 	
-	if (document.main_form.bunker.value !== "") {
+  else if (document.main_form.bunker.value != "") {
 		var user_input = document.main_form.bunker.value;
 		bunker(user_input, reload_arg);
 	}
 	
-	if (document.main_form.cannon.value !== "") {
+  else if (document.main_form.cannon.value != "") {
 		var user_input = document.main_form.cannon.value;
 		cannon(user_input, reload_arg);
 	}
