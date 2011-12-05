@@ -10,7 +10,7 @@
 
 ### How to use Tab Killer
 
-Too many tabs? Tab Killer gives you three different ways to kill them. 
+Too many tabs? Tab Killer gives you three different ways to kill them and an option to reload them in a new window. Use it with session manager for powerful snapshotting and organization. 
 
 **Sniper**: Title match/kill. 
 Enter a sequence of characters, e.g. "goog." The sniper will kill all tabs whose titles partially match your input. Thus, if you enter "goog," any tabs containing "goog" in their title (e.g. "Google") will be killed. 
