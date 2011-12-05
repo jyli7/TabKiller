@@ -7,7 +7,7 @@ body {
 
 .main_form {
 	margin:0px, -5px, -5px, -5px;
-	padding:5px;
+	padding:6px;
 	background-color:#EFEFEF;
 	font-family: 'Jura', Helvetica, sans-serif;
 	font-size:17px;
@@ -54,6 +54,12 @@ body {
   -moz-border-radius:    10px;
   -webkit-border-radius: 10px;
   border-radius:         10px;
+}
+
+.miniround {
+  -moz-border-radius:    5px;
+  -webkit-border-radius: 5px;
+  border-radius:         5px;
 }
 
 

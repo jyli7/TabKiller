@@ -4,35 +4,42 @@ $(document).ready(function() {
 });
 
 var console = chrome.extension.getBackgroundPage().console;
+
 //FOR SNIPER
-function sniper(input_title) {
+function sniper(input_title, reload_arg) {
 	inputs = input_title.split(', ');
-		
+  sniped_tabs = [];
+
 	//iterate through tabs and kill the tabs whose titles match any part of user's input
 	chrome.tabs.getAllInWindow(null, function(tabs){
-		for(i in tabs) {
+		for (i in tabs) {
 			var title = tabs[i].title;
 			var safe = true;
 			for (j in inputs) {
-				if(title.match(new RegExp(inputs[j], "i")) !== null){
+				if (title.match(new RegExp(inputs[j], "i")) !== null){
 					safe = false;
+          sniped_tabs.push(tabs[i].url);
 					break
 				}
 			}
 		
-			if(safe === false){
+			if (safe === false){
 				chrome.tabs.remove(tabs[i].id);	
-			}			
+			}
 		}
+ 
+    if (reload_arg === 1){
+      reload(sniped_tabs);
+    }
 	});		
 }	
 	
 // BUNKER FUNCTION
-
-function bunker(input_title) {
-	input_title = document.main_form.bunker.value;
+function bunker(input_title, reload_arg) {
 	inputs = input_title.split(', ');
-	//iterate through the tabs and kill the tabs whose titles match the user's input
+	non_bunker_tabs = [];
+
+//iterate through the tabs and kill the tabs whose titles match the user's input
 	chrome.tabs.getAllInWindow(null, function(tabs){
 		for(i in tabs) {
 			var title = tabs[i].title;
@@ -46,16 +53,21 @@ function bunker(input_title) {
 			}
 			//if the tab is not safe, kill it
 			if(safe === false){
-				chrome.tabs.remove(tabs[i].id);	
+	      non_bunker_tabs.push(tabs[i].url);
+			  chrome.tabs.remove(tabs[i].id);	
 			}
 		}
-	});
+	 
+    if (reload_arg === 1){
+      reload(non_bunker_tabs);
+    }
+  });
 }
 	
 //FOR CANNON
-function cannon(input_title) {
-	input_title = document.main_form.cannon.value;
-	
+function cannon(input_title, reload_arg) {
+	cannoned_tabs = [];
+
 	//iterate through tabs and kill the tabs whose titles match any part of user's input
 	chrome.tabs.getAllInWindow(null, function(tabs){
 		//get the starting number and the ending number
@@ -72,32 +84,50 @@ function cannon(input_title) {
 		for(i in tabs) {
 			if(i >= (start-1) && i <= (end-1)) {
 				chrome.tabs.remove(tabs[i].id);
-			}			
+	      cannoned_tabs.push(tabs[i].url);
+      }			
 		}
-	});		
+	 
+    if (reload_arg === 1){
+      reload(cannoned_tabs);
+    }
+  });		
 }
 
-
-function kill() {
+function shoot(reload_arg) {
 	//grab and store the user input
 	var input_title;
 	var inputs;
-	
-	//Execute functions
-	
-	if (document.main_form.sniper.value !== "") {
-		var user_input = document.main_form.sniper.value;
-		sniper(user_input);
-	}
-	
-	if (document.main_form.bunker.value !== "") {
-		var user_input = document.main_form.bunker.value;
-		bunker(user_input);
-	}
-	
-	if (document.main_form.cannon.value !== "") {
-		var user_input = document.main_form.cannon.value;
-		cannon(user_input);
-	}
 
+
+	//Execute functions
+	if (document.main_form.sniper.value != "") {
+		var user_input = document.main_form.sniper.value;
+		sniper(user_input, reload_arg);
+	}
+	
+  else if (document.main_form.bunker.value != "") {
+		var user_input = document.main_form.bunker.value;
+		bunker(user_input, reload_arg);
+	}
+	
+  else if (document.main_form.cannon.value != "") {
+		var user_input = document.main_form.cannon.value;
+		cannon(user_input, reload_arg);
+	}
+}
+
+function reload(new_tabs) {
+  if (new_tabs.length > 0){
+    chrome.windows.create({url: new_tabs, focused: false});
+  }
+}
+
+function onSubmitForm(){
+  if(document.pressed == 'Shoot'){
+    shoot(0);
+  }
+  else if(document.pressed == 'Shoot and Reload'){
+    shoot(1);
+  }
 }
