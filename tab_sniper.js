@@ -12,10 +12,10 @@ function sniper(input_title, reload_arg) {
 
 	//iterate through tabs and kill the tabs whose titles match any part of user's input
 	chrome.tabs.getAllInWindow(null, function(tabs){
-		for (i in tabs) {
+		for (var i in tabs) {
 			var title = tabs[i].title;
 			var safe = true;
-			for (j in inputs) {
+			for (var j in inputs) {
 				if (title.match(new RegExp(inputs[j], "i")) !== null){
 					safe = false;
           sniped_tabs.push(tabs[i].url);
@@ -41,11 +41,11 @@ function bunker(input_title, reload_arg) {
 
 //iterate through the tabs and kill the tabs whose titles match the user's input
 	chrome.tabs.getAllInWindow(null, function(tabs){
-		for(i in tabs) {
+		for(var i in tabs) {
 			var title = tabs[i].title;
 			var safe = false;
 			// did the user want to save the current tab?
-			for (j in inputs) {
+			for (var j in inputs) {
 				if(title.match(new RegExp(inputs[j], "i")) !== null){
 					safe = true;
 					break
